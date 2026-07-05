@@ -1,0 +1,306 @@
+@import "tailwindcss";
+
+/* ========================================
+   JK TIMBERS — LUXURY DESIGN SYSTEM
+   ======================================== */
+
+/* --- Custom Theme Tokens --- */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-border: var(--border-color);
+
+  --font-heading: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+
+  --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Light Mode (Default) --- */
+:root {
+  --background: #F7F4EF;
+  --foreground: #222222;
+  --surface: #FFFFFF;
+  --primary: #5A3E2B;
+  --secondary: #A67C52;
+  --accent: #C6A15B;
+  --muted: #8A7A6D;
+  --border-color: rgba(90, 62, 43, 0.12);
+  --glass-bg: rgba(247, 244, 239, 0.7);
+  --glass-border: rgba(90, 62, 43, 0.08);
+  --shadow-color: rgba(90, 62, 43, 0.08);
+  --overlay: rgba(34, 34, 34, 0.6);
+}
+
+/* --- Dark Mode --- */
+[data-theme="dark"] {
+  --background: #121212;
+  --foreground: #F5F5F5;
+  --surface: #1C1C1C;
+  --primary: #7B5E3C;
+  --secondary: #A67C52;
+  --accent: #D4AF37;
+  --muted: #9E9E9E;
+  --border-color: rgba(212, 175, 55, 0.12);
+  --glass-bg: rgba(18, 18, 18, 0.7);
+  --glass-border: rgba(212, 175, 55, 0.08);
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --overlay: rgba(0, 0, 0, 0.7);
+}
+
+/* --- Base Styles --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.5s var(--ease-luxury), color 0.5s var(--ease-luxury);
+  overflow-x: hidden;
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+h1 { font-size: clamp(2.5rem, 6vw, 5rem); }
+h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
+h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+
+p {
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+/* --- Selection --- */
+::selection {
+  background: var(--accent);
+  color: var(--background);
+}
+
+/* --- Scrollbar --- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* --- Glass Effect Utility --- */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+}
+
+/* --- Section Padding --- */
+.section-padding {
+  padding: clamp(4rem, 10vh, 8rem) clamp(1.5rem, 5vw, 4rem);
+}
+
+/* --- Container --- */
+.container-luxury {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* --- Section Header --- */
+.section-label {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  margin-bottom: 1.5rem;
+}
+
+.section-subtitle {
+  max-width: 600px;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+/* --- Button Base Styles --- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2.5rem;
+  background: var(--primary);
+  color: #FFFFFF;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.4s var(--ease-luxury);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transition: left 0.6s var(--ease-luxury);
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2.5rem;
+  background: transparent;
+  color: var(--foreground);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1.5px solid var(--border-color);
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.4s var(--ease-luxury);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* --- Divider --- */
+.divider-accent {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--secondary));
+  margin: 1.5rem 0;
+}
+
+/* --- Image Utilities --- */
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- Loading Screen --- */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background);
+  transition: opacity 0.8s var(--ease-luxury), visibility 0.8s var(--ease-luxury);
+}
+
+.loading-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* --- Keyframes --- */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes scroll-indicator {
+  0% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(8px); opacity: 0.3; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* --- Focus Visible --- */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* --- Responsive Text Utilities --- */
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 3rem 1.25rem;
+  }
+  
+  p {
+    font-size: 0.95rem;
+  }
+}
